@@ -1,6 +1,15 @@
 # occupation_capacity_data_analyze
 Crawl a specific recruit website, store the data by Apache Hadoop, analyze the data by Spark, support web page display
 
+## 2023.7.6 项目开爬：
+
+### 今日任务
+
+everyone:
+
++ 昨日未完成之事continue;
++ 根据昨日在线表格填写之需求，每人2个，爬取数据并存储至Hadoop、使用Spark分析计算、最终存储至远程MySQL（IP、端口、账号密码见群），数据量以万为单位
+
 ## 2023.7.5 项目初始化：
 
 ### 项目环境说明
