@@ -1,8 +1,6 @@
 # occupation_capacity_data_analyze
 Crawl a specific recruit website, store the data by Apache Hadoop, analyze the data by Spark, support web page display
 
-yzy尝试提交
-
 ## 2023.7.5 项目初始化：
 
 ### 项目环境说明
