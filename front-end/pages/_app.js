@@ -1,5 +1,47 @@
-import '@/styles/globals.css'
+import Layout from "@/components/layout";
+import { createTheme, NextUIProvider } from "@nextui-org/react"
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { useRouter } from "next/router";
+import { useState } from "react";
+
+const lightTheme = createTheme({
+  type: 'light',
+  // theme: {
+  //   colors: {...}, // optional
+  // }
+})
+
+const darkTheme = createTheme({
+  type: 'dark',
+  // theme: {
+  //   colors: {...}, // optional
+  // }
+})
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  const router = useRouter();
+  const [homeSelect, setHomeSelect] = useState(1);
+  const [hotCompanySelect, setHotCompanySelect] = useState(1);
+  const [hotingSelect, setHotingSelect] = useState(1);
+
+  return (
+    // 2. Use at the root of your app
+    <NextThemesProvider
+      defaultTheme="system"
+      attribute="class"
+      value={{
+        light: lightTheme.className,
+        dark: darkTheme.className
+      }}>
+      <NextUIProvider>
+        <Layout>
+          <Component
+            homeSelect={homeSelect} onHomeSelect={(v) => setHomeSelect(v)}
+            hotCompanySelect={hotCompanySelect} onSelect={(v) => setHotCompanySelect(v)}
+            hotingSelect={hotingSelect} topSelect={(v) => setHotingSelect(v)}
+          />
+        </Layout>
+      </NextUIProvider>
+    </NextThemesProvider>
+  );
 }

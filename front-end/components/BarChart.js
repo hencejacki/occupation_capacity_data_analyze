@@ -1,6 +1,6 @@
 import EChartsReact from 'echarts-for-react';
 
-const TestChart = ({ title, details }) => {
+const BarChart = ({ title, details }) => {
 
     // 数据处理
     let sources = [['category', 'salary_min', 'salary_max']]
@@ -27,11 +27,11 @@ const TestChart = ({ title, details }) => {
     };
     return (
         <>
-            <div style={{ width: 800 + 'px', height: 300 + 'px' }}>
+            <div style={{ width: "80vw", height: "30vh" }}>
                 <EChartsReact option={dynamic_option} />
             </div>
         </>
     );
 }
 
-export default TestChart;
+export default BarChart;
