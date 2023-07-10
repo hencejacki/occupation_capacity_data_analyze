@@ -1,38 +1,188 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Occupation Capacity Analyze System
 
-## Getting Started
+## 图表需求
 
-First, run the development server:
++ 就业薪资：柱状图（多）
++ 热门岗位：TOP排行榜
++ 热门就业城市：TOP排行榜
++ 就业学历：饼图
++ 热门职位分类：柱状图（horization）
++ 热门领域公司：饼图（多）
++ 城市与薪资关系：Map图
++ 学历和薪资关系分析：雷达图
++ 岗位经验要求：饼图
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 界面分析
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
++ 城市-薪资关系图: Map
++ 热门岗位+热门就业城市: 排行榜两列
++ 就业薪资(主页)
++ 热门领域公司
++ 其他：4分列（就业学历，热门职位分类，学历-薪资关系，岗位经验要求）
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## API分析
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. 城市-薪资关系Map界面：
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+~~~json
+api: /degree_salary
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "city": "青岛",
+            "salary": "23" 
+        }
+        ...
+    ]
+}
+~~~
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. 热门就业岗位+热门就业城市界面：
 
-## Learn More
+~~~json
+// 热门岗位
+api: /hot_career
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "career": "Java",
+            "demand": "1124" 
+        }
+        ...
+    ]
+}
 
-To learn more about Next.js, take a look at the following resources:
+// 热门城市职位需求
+api: /hot_cities
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "city": "青岛",
+            "jobNums": "12" 
+        }
+        ...
+    ]
+}
+~~~
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.就业薪资界面：
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+~~~json
+api: /career_salary
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "category":"IT互联网产品",
+             "details": [
+                {
+                    "career": "Java",
+                    "min": "12",
+                    "max": "3"
+                },
+                ...
+             ]
+        }
+        ...
+    ]
+}
+~~~
 
-## Deploy on Vercel
+4. 热门领域公司界面：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+~~~json
+api: /hot_company
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "domain":"IT互联网产品",
+             "details": [
+                {
+                    "company": "特斯拉(上海)有限公司",
+                    "jobs": "119",
+                },
+                ...
+             ]
+        }
+        ...
+    ]
+}
+~~~
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. 其他界面：
+
+~~~json
+// 学历要求
+api: /degree_demand
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "degree": "大专",
+            "demand": "12" 
+        }
+        ...
+    ]
+}
+
+// 热门领域职位分类
+api: /hot_domain
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "domain": "广告/传媒/公关/展览",
+            "jobs": "273" 
+        }
+        ...
+    ]
+}
+
+// 学历-薪资关系
+api: /degree_salary
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "degree": "大专",
+            "salary": "23" 
+        }
+        ...
+    ]
+}
+
+// 经验需求
+api: /experience_demand
+method: GET
+return {
+    "code": "string",
+    "msg": "string",
+    "data": [
+        {
+            "experience": "不限",
+            "demand": "8888" 
+        }
+        ...
+    ]
+}
+~~~
