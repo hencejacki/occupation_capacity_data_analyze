@@ -24,7 +24,7 @@
 
 1. 城市-薪资关系Map界面：
 
-~~~json
+~~~
 api: /city_salary
 method: GET
 return {
@@ -42,7 +42,7 @@ return {
 
 2. 热门就业岗位+热门就业城市界面：
 
-~~~json
+~~~
 // 热门岗位
 api: /hot_career
 method: GET
@@ -76,7 +76,7 @@ return {
 
 3.就业薪资界面：
 
-~~~json
+~~~
 api: /career_salary
 method: GET
 return {
@@ -101,7 +101,7 @@ return {
 
 4. 热门领域公司界面：
 
-~~~json
+~~~
 api: /hot_company
 method: GET
 return {
@@ -125,7 +125,7 @@ return {
 
 5. 其他界面：
 
-~~~json
+~~~
 // 学历要求
 api: /degree_demand
 method: GET
