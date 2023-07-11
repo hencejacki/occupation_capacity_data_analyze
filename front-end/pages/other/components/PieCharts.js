@@ -172,3 +172,7 @@ export function FourthPieChart({ details }) {
         <ReactEcharts option={options} style={{ width: "50vw", height: "60vh" }} />
     );
 }
+
+export default function PieChart() {
+    return <></>
+}
