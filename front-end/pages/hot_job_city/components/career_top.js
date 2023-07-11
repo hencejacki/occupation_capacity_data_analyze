@@ -4,7 +4,7 @@ import { Button, Container, Row, Col, Text, Card, Grid, Spacer } from "@nextui-o
 export default function CareerTop({ details }) {
 
     let i = 1;
-    const topItems = details.map(detail => {
+    const topItems = details?.map(detail => {
         return (
             <>
                 <Row justify="center">

@@ -14,7 +14,7 @@ const MainBody = ({ homeSelect, onHomeSelect }) => {
   console.log(data);
 
   let i = 1;
-  const radioItems = data.map(item => {
+  const radioItems = data?.map(item => {
     return <Radio key={item.category} value={i++}>{item.category}</Radio>;
   });
 

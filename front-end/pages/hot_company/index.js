@@ -12,7 +12,7 @@ const HotCompany = ({ hotCompanySelect, onSelect }) => {
     if (isLoading) return <Loading size="xl">Loading...</Loading>
 
     let i = 1;
-    const radioItems = data.map(item => {
+    const radioItems = data?.map(item => {
         return <Radio key={item.domain} value={i++}>{item.domain}</Radio>;
     });
 

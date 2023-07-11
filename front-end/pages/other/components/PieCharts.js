@@ -4,7 +4,7 @@ import ReactEcharts from "echarts-for-react";
 export function FirstPieChart({ details }) {
 
     let datas = [];
-    details.map(detail => {
+    details?.map(detail => {
         datas.push({
             name: detail.degree,
             value: detail.demand
@@ -47,7 +47,7 @@ export function FirstPieChart({ details }) {
 export function SecondPieChart({ details }) {
 
     let datas = [];
-    details.map(detail => {
+    details?.map(detail => {
         datas.push({
             name: detail.domain,
             value: detail.jobs
@@ -90,7 +90,7 @@ export function SecondPieChart({ details }) {
 export function ThridPieChart({ details }) {
 
     let datas = [];
-    details.map(detail => {
+    details?.map(detail => {
         datas.push({
             name: detail.degree,
             value: detail.salary
@@ -133,7 +133,7 @@ export function ThridPieChart({ details }) {
 export function FourthPieChart({ details }) {
 
     let datas = [];
-    details.map(detail => {
+    details?.map(detail => {
         datas.push({
             name: detail.experience,
             value: detail.demand
