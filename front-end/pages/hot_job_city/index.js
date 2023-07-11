@@ -11,8 +11,6 @@ const MainBody = ({ hotingSelect, topSelect }) => {
 
     if (isLoading) return <Loading size="xl">Loading...</Loading>
 
-    console.log(data);
-
     return (
         <Container gap={0}>
             <Row justify="center">
