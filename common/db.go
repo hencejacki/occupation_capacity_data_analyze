@@ -16,7 +16,7 @@ func InitDB() *gorm.DB {
 	if err != nil {
 		panic("链接失败" + err.Error())
 	}
-	fmt.Println("链接OK")
+	fmt.Println("*********链接OK*********")
 	DB = db
 	return db
 }

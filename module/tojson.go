@@ -1,40 +1,23 @@
 package module
 
-var HotTip []TipJobs
-var Intenet []TipCompanyInt
-var Car []TipCompanyCar
-var Store []TipCompanyStore
-var Meno []TipCompanyMenoy
-var House []TipCompanyHouse
-var Hea []TipCompanyHouse
-var Job_Analyze []JobAnalyze
-var Salary_Analyz []SalaryAnalyze
-var RankCJob []RankCityJob
-var CSInfo []CitySalaryInfo
-var ERequire []EducationRequire
-var DgSal []DegreeSalary
-var ExNum []ExperienceNum
-var HotCom []HotCompanyBase
-var CareSala []CareerSalaryBase
-
 type RankCityJob struct {
 	City string `json:"city"`
 	Num  string `json:"jobNums"`
 }
 
 type CitySalaryInfo struct {
-	City   string `json:"city"`
-	Salary string `json:"salary"`
+	City   string `json:"city" gorm:"column:city"`
+	Salary string `json:"salary" gorm:"column:avg_salary"`
 }
 
 type EducationRequire struct {
-	Degree string `json:"degree"`
-	Num    string `json:"demand"`
+	Degree string `json:"degree" gorm:"column:degree"`
+	Num    string `json:"demand" gorm:"column:num"`
 }
 
 type DegreeSalary struct {
-	Degree string `json:"degree"`
-	Salary string `json:"salary"`
+	Degree string `json:"degree" gorm:"column:degree"`
+	Salary string `json:"salary" gorm:"column:salary"`
 }
 
 type ExperienceNum struct {
@@ -78,14 +61,14 @@ type TipCompanyStore struct {
 }
 
 type JobAnalyze struct {
-	Job_Name   string `json:"career"`
-	Job_Demand string `json:"demand"`
+	JobName   string `json:"career"`
+	JobDemand string `json:"demand"`
 }
 
 type SalaryAnalyze struct {
-	Job_Detail string `json:"career"`
-	Salary_Max string `json:"max"`
-	Salary_Min string `json:"min"`
+	JobDetail string `json:"career" gorm:"column:jobDetail"`
+	SalaryMax string `json:"max" gorm:"column:salaryMax"`
+	SalaryMin string `json:"min" gorm:"column:salaryMin"`
 }
 
 type HotCompanyBase struct {
