@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
   return (
     // 2. Use at the root of your app
     <NextThemesProvider
-      defaultTheme="system"
+      defaultTheme="light"
       attribute="class"
       value={{
         light: lightTheme.className,
