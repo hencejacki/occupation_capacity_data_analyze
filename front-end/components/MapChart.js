@@ -57,6 +57,11 @@ export default function MapChart({ details }) {
                         show: true
                     }
                 },
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' k/月';
+                    }
+                },
                 data: details,
                 // 自定义名称映射
                 nameMap: {

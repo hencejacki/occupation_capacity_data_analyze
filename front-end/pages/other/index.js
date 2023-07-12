@@ -8,7 +8,7 @@ const fetcher = () => fetch('/api/other').then((res) => res.json());
 const MainBody = ({ otherSelect, setOtherSelect }) => {
     const { data, error, isLoading } = useSWR("/api/other", fetcher);
 
-    if (isLoading) return <Loading size="xl">isLoading...</Loading>
+    if (isLoading) return <Loading size="xl">Loading...</Loading>
 
     if (error) return <ErrorPage />
 

@@ -5,13 +5,12 @@ import ErrorPage from "@/components/error";
 
 const fetcher = () => fetch('/api/city_salary').then((res) => res.json());
 
-const CitySalaryMap = () => {
-
+const MainBody = () => {
     const { data, error, isLoading } = useSWR('/api/city_salary', fetcher);
 
     if (isLoading) return <Loading size="xl">Loading...</Loading>
 
-    if (error) return <ErrorPage/>
+    if (error) return <ErrorPage />
 
     // 处理数据为地图可读格式
     let datas = [];
@@ -21,6 +20,18 @@ const CitySalaryMap = () => {
             value: item.salary
         })
     });
+
+    return (
+        <Container gap={0}>
+            <Row justify="center">
+                <MapChart details={datas} />
+            </Row>
+        </Container>
+    );
+
+}
+
+const CitySalaryMap = () => {
 
     return (
         <>
@@ -34,11 +45,7 @@ const CitySalaryMap = () => {
             >
                 城市-薪资分析
             </Text>
-            <Container gap={0}>
-                <Row justify="center">
-                    <MapChart details={datas} />
-                </Row>
-            </Container>
+            <MainBody />
         </>
     );
 }

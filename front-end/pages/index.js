@@ -1,6 +1,6 @@
 import BarChart from '@/components/BarChart';
-import React, { useState } from 'react';
-import { Container, Card, Row, Text, Col, Spacer, Loading, Radio, Pagination, Button } from "@nextui-org/react";
+import React from 'react';
+import { Container, Card, Row, Text, Spacer, Loading, Radio, Pagination } from "@nextui-org/react";
 import useSWR from "swr";
 import ErrorPage from '@/components/error';
 
