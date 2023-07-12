@@ -1,15 +1,61 @@
-import { Container, Card, Row, Text, Col, Spacer, Loading } from "@nextui-org/react";
+import { Container, Card, Row, Text, Col, Spacer, Loading, Radio } from "@nextui-org/react";
 import { FirstPieChart, SecondPieChart, ThridPieChart, FourthPieChart } from "./components/PieCharts";
 import useSWR from "swr";
+import ErrorPage from "@/components/error";
 
 const fetcher = () => fetch('/api/other').then((res) => res.json());
 
-const Other = () => {
-
+const MainBody = ({ otherSelect, setOtherSelect }) => {
     const { data, error, isLoading } = useSWR("/api/other", fetcher);
 
     if (isLoading) return <Loading size="xl">isLoading...</Loading>
 
+    if (error) return <ErrorPage />
+
+    const DisplayChart = () => {
+        switch (otherSelect) {
+            case 1:{
+                return <FirstPieChart degree_demand={data[0]} degree_salary={data[2]}/>
+            }
+            case 2: {
+                return <SecondPieChart details={data[1]}/>
+            }
+            case 3: {
+                return <FourthPieChart details={data[3]}/>
+            }
+            default: {
+                return <></>
+            }
+        }
+    }
+
+    return (
+        <Container gap={0}>
+            <Row align="center">
+                <Spacer x={4} />
+                <Col span={3}>
+                    <Row justify="center">
+                        <Card css={{ mw: "20vw" }}>
+                            <Card.Body>
+                                <Radio.Group onChange={setOtherSelect} label="Cateories" defaultValue={otherSelect}>
+                                    <Radio value={1}>学历-薪资-需求</Radio>
+                                    <Radio value={2}>热门职位分类</Radio>
+                                    <Radio value={3}>岗位经验</Radio>
+                                </Radio.Group>
+                            </Card.Body>
+                        </Card>
+                    </Row>
+                </Col>
+                <Col>
+                    <DisplayChart/>
+                </Col>
+            </Row>
+        </Container>
+    );
+
+}
+
+const Other = ({ otherSelect, setOtherSelect }) => {
     return (
         <>
             <Text
@@ -22,26 +68,8 @@ const Other = () => {
             >
                 就业学历,热门职位分类,学历-薪资关系,岗位经验
             </Text>
-            {/* <Spacer y={3} /> */}
-            <Container gap={0}>
-                <Row justify="center">
-                    <Col>
-                        <FirstPieChart details={data[0]} />
-                    </Col>
-                    <Col>
-                        <SecondPieChart details={data[1]} />
-                    </Col>
-                </Row>
-                <Spacer y={2} />
-                <Row justify="center">
-                    <Col>
-                        <ThridPieChart details={data[2]} />
-                    </Col>
-                    <Col>
-                        <FourthPieChart details={data[3]} />
-                    </Col>
-                </Row>
-            </Container>
+            <Spacer y={3}/>
+            <MainBody otherSelect={otherSelect} setOtherSelect={setOtherSelect} />
         </>
     );
 }

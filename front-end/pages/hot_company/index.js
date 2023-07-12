@@ -1,15 +1,21 @@
-import Layout from "@/components/layout";
 import { Container, Card, Row, Text, Col, Spacer, Loading, Radio } from "@nextui-org/react";
 import PieChart from "@/components/PieChart";
 import useSWR from "swr";
+import ErrorPage from "@/components/error";
 
 const fetcher = () => fetch('/api/hot_company').then((res) => res.json());
+
+const MainBody = ({}) => {
+    
+}
 
 const HotCompany = ({ hotCompanySelect, onSelect }) => {
 
     const { data, error, isLoading } = useSWR("/api/hot_company", fetcher);
 
     if (isLoading) return <Loading size="xl">Loading...</Loading>
+
+    if (error) return <ErrorPage/>
 
     let i = 1;
     const radioItems = data?.map(item => {

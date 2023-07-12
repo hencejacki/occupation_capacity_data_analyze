@@ -12,17 +12,11 @@ export default function PieChart({ details }) {
     })
 
     const options = {
+        tooltip: {
+            trigger: 'item',
+        },
         legend: {
             top: 'bottom'
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: { show: true },
-                dataView: { show: true, readOnly: false },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
         },
         series: [
             {
@@ -34,7 +28,12 @@ export default function PieChart({ details }) {
                 itemStyle: {
                     borderRadius: 8
                 },
-                data: datas
+                data: datas,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' 个';
+                    }
+                },
             }
         ]
     };

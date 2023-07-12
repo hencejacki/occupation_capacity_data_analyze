@@ -2,8 +2,8 @@ import axios from "axios";
 
 // 创建axios实例
 const request = axios.create({
-    baseURL: process.env.YOUDAO_API,
-    timeout: 1000,
+    baseURL: process.env.API,
+    timeout: 38000,
     headers: {}
 });
 

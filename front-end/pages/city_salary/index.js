@@ -1,8 +1,27 @@
-import { Container, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { Container, Card, Row, Text, Col, Spacer, Loading } from "@nextui-org/react";
 import MapChart from "@/components/MapChart";
+import useSWR from "swr";
+import ErrorPage from "@/components/error";
 
+const fetcher = () => fetch('/api/city_salary').then((res) => res.json());
 
 const CitySalaryMap = () => {
+
+    const { data, error, isLoading } = useSWR('/api/city_salary', fetcher);
+
+    if (isLoading) return <Loading size="xl">Loading...</Loading>
+
+    if (error) return <ErrorPage/>
+
+    // 处理数据为地图可读格式
+    let datas = [];
+    data.map(item => {
+        datas.push({
+            name: item.city,
+            value: item.salary
+        })
+    });
+
     return (
         <>
             <Text
@@ -17,7 +36,7 @@ const CitySalaryMap = () => {
             </Text>
             <Container gap={0}>
                 <Row justify="center">
-                    <MapChart />
+                    <MapChart details={datas} />
                 </Row>
             </Container>
         </>
