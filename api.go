@@ -3,13 +3,12 @@ package main
 import (
 	"bigdata/global"
 	"bigdata/module"
-	"bigdata/util"
 	"github.com/gin-gonic/gin"
 )
 
 func GetHotCompany(c *gin.Context) {
 	// 给HotCom赋值
-	util.HotCompanyStruct()
+	//util.HotCompanyStruct()
 	rp := module.BaseResponse{
 		200,
 		"yzy",

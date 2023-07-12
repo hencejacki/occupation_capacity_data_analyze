@@ -4,12 +4,13 @@ import "bigdata/module"
 
 var HotTip []module.TipJobs //热门职业
 // 相关领域热门公司
-var Intenet []module.TipCompanyInt
-var Car []module.TipCompanyCar
-var Store []module.TipCompanyStore
-var Meno []module.TipCompanyMenoy
-var House []module.TipCompanyHouse
-var Hea []module.TipCompanyHouse
+// var Intenet []module.TipCompanyInt
+// var Car []module.TipCompanyCar
+// var Store []module.TipCompanyStore
+// var Meno []module.TipCompanyMenoy
+// var House []module.TipCompanyHouse
+// var Hea []module.TipCompanyHouse
+var TipCom []module.TipCompany
 
 var Job_Analyze []module.JobAnalyze      //职业需求
 var Salary_Analyz []module.SalaryAnalyze //各个领域职业薪资

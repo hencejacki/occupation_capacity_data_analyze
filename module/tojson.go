@@ -30,34 +30,39 @@ type TipJobs struct {
 	Jobs string `json:"jobs"`
 }
 
-type TipCompanyCar struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
-}
+//type TipCompanyCar struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
+//
+//type TipCompanyHea struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
+//
+//type TipCompanyHouse struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
+//
+//type TipCompanyInt struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
+//
+//type TipCompanyMenoy struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
+//
+//type TipCompanyStore struct {
+//	Company string `json:"company"`
+//	Jobs    string `json:"jobs"`
+//}
 
-type TipCompanyHea struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
-}
-
-type TipCompanyHouse struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
-}
-
-type TipCompanyInt struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
-}
-
-type TipCompanyMenoy struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
-}
-
-type TipCompanyStore struct {
-	Company string `json:"company"`
-	Jobs    string `json:"jobs"`
+type TipCompany struct {
+	Company string `json:"company" gorm:"column:company"`
+	Jobs    string `json:"jobs" gorm:"column:jobs"`
 }
 
 type JobAnalyze struct {

@@ -31,5 +31,5 @@ func main() {
 
 	route(r)
 
-	r.Run(":8080")
+	r.Run(":80")
 }
