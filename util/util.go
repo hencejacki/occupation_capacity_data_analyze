@@ -69,7 +69,7 @@ func GetDataSql(db *gorm.DB) {
 	db.Table("jobs_analyze").Order("job_demand desc").Find(&global.Job_Analyze)
 	db.Table("Educational_requirements").Select("TRIM(degree) as degree, num").Find(&global.ERequire)
 	db.Table("experience_num").Find(&global.ExNum)
-	db.Table("Ranking_of_city_jobs").Find(&global.RankCJob)
+	db.Table("Ranking_of_city_jobs").Order("num desc").Find(&global.RankCJob)
 	db.Table("city_salary_info").Select("city, ROUND(avg_salary, 2) as avg_salary").Find(&global.CSInfo)
 	db.Table("degree_salary").Select("degree, ROUND(salary, 2) as salary").Find(&global.DgSal)
 }
