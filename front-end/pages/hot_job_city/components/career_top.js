@@ -26,7 +26,7 @@ export default function CareerTop({ details }) {
                                     </Text>
                                 </Grid>
                                 <Grid xs={12}>
-                                    <Text css={{ color: "$accents8" }}>薪资：{detail.demand}元</Text>
+                                    <Text css={{ color: "$accents8" }}>需求: {detail.demand}人</Text>
                                 </Grid>
                             </Grid.Container>
                         </Card.Header>

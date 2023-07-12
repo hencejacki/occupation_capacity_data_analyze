@@ -23,6 +23,8 @@ export default function App({ Component, pageProps }) {
   const [homeSelect, setHomeSelect] = useState(1);
   const [hotCompanySelect, setHotCompanySelect] = useState(1);
   const [hotingSelect, setHotingSelect] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [otherSelect, setOtherSelect] = useState(1);
 
   return (
     // 2. Use at the root of your app
@@ -39,6 +41,8 @@ export default function App({ Component, pageProps }) {
             homeSelect={homeSelect} onHomeSelect={(v) => setHomeSelect(v)}
             hotCompanySelect={hotCompanySelect} onSelect={(v) => setHotCompanySelect(v)}
             hotingSelect={hotingSelect} topSelect={(v) => setHotingSelect(v)}
+            currentPage={currentPage} pageSelect={(v) => setCurrentPage(v)}
+            otherSelect={otherSelect} setOtherSelect={(v) => setOtherSelect(v)}
           />
         </Layout>
       </NextUIProvider>

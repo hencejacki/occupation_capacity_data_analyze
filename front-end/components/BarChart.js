@@ -3,15 +3,16 @@ import EChartsReact from 'echarts-for-react';
 const BarChart = ({ title, details }) => {
 
     // 数据处理
-    let sources = [['category', 'salary_min', 'salary_max']]
+    let sources = [['category', '最低薪资', '平均薪资', '最高薪资']]
     details.map(detail => {
-        sources.push([detail.career, detail.min, detail.max]);
+        let avg = (Number(detail.min) + Number(detail.max)) / 2;
+        sources.push([detail.career, detail.min, avg, detail.max]);
     })
 
     const dynamic_option = {
         title: {
             text: title,
-            top: '85%',
+            top: '95%',
             left: "center"
         },
         legend: {},
@@ -20,17 +21,43 @@ const BarChart = ({ title, details }) => {
             source: sources
         },
         xAxis: { type: 'category' },
-        yAxis: {},
+        yAxis: {
+            axisLabel: {
+                formatter: '{value} k/月'
+            }
+        },
         // Declare several bar series, each will be mapped
         // to a column of dataset.source by default.
-        series: [{ type: 'bar' }, { type: 'bar' }]
+        series: [
+            {
+                type: 'bar',
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' k/月';
+                    }
+                },
+            },
+            {
+                type: 'line',
+                smooth: 0.5,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' k/月';
+                    }
+                },
+            },
+            {
+                type: 'bar',
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' k/月';
+                    }
+                },
+            }
+        ]
     };
     return (
-        <>
-            <div style={{ width: "80vw", height: "30vh" }}>
-                <EChartsReact option={dynamic_option} />
-            </div>
-        </>
+        <EChartsReact option={dynamic_option} style={{ width: "100vw", height: "50vh" }} />
     );
 }
 

@@ -2,6 +2,7 @@ import { Container, Card, Row, Text, Col, Spacer, Radio, Loading } from "@nextui
 import useSWR from "swr";
 import CareerTop from "./components/career_top";
 import CityTop from "./components/city_top";
+import ErrorPage from "@/components/error";
 
 const fetcher = () => fetch('/api/hoting').then((res) => res.json());
 
@@ -10,6 +11,8 @@ const MainBody = ({ hotingSelect, topSelect }) => {
     const { data, error, isLoading } = useSWR('/api/hoting', fetcher);
 
     if (isLoading) return <Loading size="xl">Loading...</Loading>
+
+    if (error) return <ErrorPage/>
 
     return (
         <Container gap={0}>

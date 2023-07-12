@@ -1,3 +1,4 @@
+import request from "@/utils/request";
 
 const hot_career = [
     {
@@ -85,11 +86,16 @@ const hot_cities = [
     },
 ]
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+
+    const hot_career_resp = await request.get('/hot_career');
+
+    const hot_cities_resp = await request.get('/hot_cities');
+
     res.status(200).json(
         [
-            hot_career,
-            hot_cities
+            hot_career_resp.data,
+            hot_cities_resp.data
         ]
     );
 }

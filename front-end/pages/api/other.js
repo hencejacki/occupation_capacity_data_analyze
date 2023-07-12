@@ -1,4 +1,4 @@
-// import request from "@/utils/request"
+import request from "@/utils/request"
 
 const degree_demand = [
     {
@@ -76,13 +76,22 @@ const experience_demand = [
     },
 ]
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+
+    const degree_demand_resp = await request.get('/degree_demand')
+
+    const hot_domain_resp = await request.get('/hot_domain')
+
+    const degree_salary_resp = await request.get('/degree_salary')
+
+    const experience_demand_resp = await request.get('/experience_demand')
+
     res.status(200).json(
         [
-            degree_demand,
-            hot_domain,
-            degree_salary,
-            experience_demand
+            degree_demand_resp.data,
+            hot_domain_resp.data,
+            degree_salary_resp.data,
+            experience_demand_resp.data
         ]
     );
 }
