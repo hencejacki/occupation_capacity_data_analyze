@@ -62,8 +62,14 @@ type BaseResponse struct {
 	Data interface{} `json:"data"`
 }
 
+type EmailBody struct {
+	JobNum  string `gorm:"column:job_demand"`
+	JobName string `gorm:"column:job_name"`
+	//Tip     string `gorm:"column:tip"`
+}
+
 type Email struct {
 	To      string `form:"to" binding:"required"`
 	Subject string
-	Body    string
+	Body    interface{}
 }

@@ -25,6 +25,7 @@ var HotCom []module.HotCompanyBase         //拼接后的热门领域公司
 var CareSalaBase []module.CareerSalaryBase //拼接后的领域 职业与薪资关系
 
 var Email module.Email
+var EmailBody []module.EmailBody
 
 const (
 	User     = "1486804776@qq.com"

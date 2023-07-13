@@ -83,11 +83,12 @@ func GetHotTip(c *gin.Context) {
 }
 
 func PostMail(c *gin.Context) {
-	global.Email.To = c.PostForm("to")
+	err := c.ShouldBind(&global.Email.To)
 	//global.Email.To = c.Query("to")
-	global.Email.Subject = "热门公司--IT/互联网"
-	global.Email.Body = "小米,点晴科技,网易,华为,百度"
-	if err := util.SendMail(); err != nil {
+	global.Email.Subject = "热门公司"
+	//global.Email.Body = "小米,点晴科技,网易,华为,百度"
+	global.Email.Body = global.EmailBody
+	if err = util.SendMail(global.Email.To, global.Email.Subject, util.ToString(global.EmailBody)); err != nil {
 		c.JSON(200, gin.H{
 			"code": 200,
 			"msg":  "Seng email successful",
