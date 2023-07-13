@@ -8,17 +8,7 @@ import (
 )
 
 func GetEmailBody(db *gorm.DB) {
-	//db.Table("sxsorig").Order("jobs desc").Limit(10).Find(&global.EmailBody)
-
-	//for _, body := range global.HotCom {
-	//	mail := module.EmailBody{
-	//		Company: body.Company,
-	//		Jobs:    body.Jobs,
-	//	}
-	//	global.EmailBody = append(global.EmailBody, mail)
-	//}
-	db.Table("jobs_analyze").Order("job_demand desc").Limit(1).Find(&global.EmailBody)
-	//fmt.Println(global.EmailBody)
+	db.Table("jobs_analyze").Order("job_demand desc").Limit(10).Find(&global.EmailBody)
 }
 
 func CareerSalary(db *gorm.DB) {

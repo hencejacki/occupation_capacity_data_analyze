@@ -1,38 +1,36 @@
 package util
 
 import (
-	"bigdata/global"
+	_const "bigdata/const"
 	"bigdata/module"
-	"bytes"
 	"fmt"
-	"net/smtp"
-	"strings"
+	"gopkg.in/gomail.v2"
 )
 
-func SendMail(to, subject, body string) error {
-	////取出主机部分
-	//host := strings.Split(global.Host, ":")
-	//发送者账号信息
-	auth := smtp.PlainAuth("", global.User, global.Password, global.Host)
-	//发送邮件主体类型
-	contentType := "Content-Type: text/plain" + "; charset=UTF-8"
-	//消息主体
-	msg := []byte("To: " + to + "\r\nFrom: " + global.User + "<" + global.User + ">\r\nSubject: " + subject + "\r\n" + contentType + "\r\n\r\n" + body)
-	//发送邮件需要切片类型
-	sendTo := strings.Split(global.Email.To, ";")
-	//发送邮件
-	//将host和port拼接
-	hostNew := global.Host + ":" + global.Port
-	err := smtp.SendMail(hostNew, auth, global.User, sendTo, msg)
+func SendMail(mailMess string) error {
+	m := gomail.NewMessage()
+	m.SetHeader("From", _const.User)       //发件人
+	m.SetHeader("To", "1486804776@qq.com") //收件人
+	//m.SetAddressHeader("Cc", "test@126.com", "test")     //抄送人
+	m.SetHeader("Subject", "热门岗位推送") //邮件标题
+	m.SetBody("text/html", mailMess) //邮件内容
+	//m.Attach("E:\\IMGP0814.JPG")       //邮件附件
+	d := gomail.NewDialer(
+		_const.Host,
+		25,
+		_const.User,
+		_const.Password)
+	//邮件发送服务器信息,使用授权码而非密码
+	err := d.DialAndSend(m)
 	return err
-
 }
 
-func ToString(Body []module.EmailBody) string {
-	var buffer bytes.Buffer
-	for _, body := range Body {
-		buffer.WriteString(fmt.Sprintf("jobName: %s, jobNum: %s   ", body.JobName, body.JobNum))
+func ToForm(resStruct []module.EmailBody) error {
+	var mailMessage = _const.MailMess
+	for _, value := range resStruct {
+		mailMessage = mailMessage + fmt.Sprintf("<td>%v</td><td>%v</td></tr>",
+			value.JobName, value.JobNum)
 	}
-	fmt.Println(buffer.String())
-	return buffer.String()
+	mailMessage = mailMessage + "</table><br></br><br>Send By 1486804776@qq.com.cn</br>（自动发送请勿回复）"
+	return SendMail(mailMessage) //拼接完成后，调用函数发送邮件
 }

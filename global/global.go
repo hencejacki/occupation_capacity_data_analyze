@@ -26,10 +26,3 @@ var CareSalaBase []module.CareerSalaryBase //拼接后的领域 职业与薪资�
 
 var Email module.Email
 var EmailBody []module.EmailBody
-
-const (
-	User     = "1486804776@qq.com"
-	Password = "qqlcfehrstgmgcag"
-	Host     = "smtp.qq.com"
-	Port     = "25"
-)
