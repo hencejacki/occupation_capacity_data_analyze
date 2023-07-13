@@ -2,6 +2,7 @@ package util
 
 import (
 	_const "bigdata/const"
+	"bigdata/global"
 	"bigdata/module"
 	"fmt"
 	"gopkg.in/gomail.v2"
@@ -9,8 +10,8 @@ import (
 
 func SendMail(mailMess string) error {
 	m := gomail.NewMessage()
-	m.SetHeader("From", _const.User)       //发件人
-	m.SetHeader("To", "1486804776@qq.com") //收件人
+	m.SetHeader("From", _const.User)   //发件人
+	m.SetHeader("To", global.Email.To) //收件人
 	//m.SetAddressHeader("Cc", "test@126.com", "test")     //抄送人
 	m.SetHeader("Subject", "热门岗位推送") //邮件标题
 	m.SetBody("text/html", mailMess) //邮件内容
