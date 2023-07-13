@@ -4,6 +4,7 @@ import (
 	"bigdata/global"
 	"bigdata/module"
 	"bigdata/util"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -83,8 +84,9 @@ func GetHotTip(c *gin.Context) {
 }
 
 func PostMail(c *gin.Context) {
-	err := c.ShouldBind(&global.Email.To)
+	err := c.ShouldBind(&global.Email)
 	//global.Email.To = c.Query("to")
+	fmt.Println(global.Email.To)
 	global.Email.Subject = "热门岗位推送"
 	global.Email.Body = global.EmailBody
 	if err = util.ToForm(global.EmailBody); err == nil {

@@ -69,7 +69,7 @@ type EmailBody struct {
 }
 
 type Email struct {
-	To      string `form:"to" binding:"required"`
+	To      string `json:"to" form:"to" binding:"required"`
 	Subject string
 	Body    interface{}
 }
