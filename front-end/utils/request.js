@@ -4,7 +4,7 @@ import axios from "axios";
 const request = axios.create({
     baseURL: process.env.API,
     timeout: 38000,
-    headers: {}
+    headers: {},
 });
 
 // 拦截器添加
