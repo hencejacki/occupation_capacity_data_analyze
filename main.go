@@ -20,6 +20,8 @@ func route(r *gin.Engine) {
 	r.GET("/hot_domain", GetHotTip)
 	r.GET("/degree_salary", GetDegreeSala)
 	r.GET("/experience_demand", GetExpNum)
+
+	r.POST("/mail", PostMail)
 }
 
 func main() {

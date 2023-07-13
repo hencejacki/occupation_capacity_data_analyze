@@ -3,6 +3,7 @@ package main
 import (
 	"bigdata/global"
 	"bigdata/module"
+	"bigdata/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -79,4 +80,22 @@ func GetHotTip(c *gin.Context) {
 		"yzy",
 		global.HotTip}
 	c.JSON(200, rp)
+}
+
+func PostMail(c *gin.Context) {
+	global.Email.To = c.PostForm("to")
+	//global.Email.To = c.Query("to")
+	global.Email.Subject = "热门公司--IT/互联网"
+	global.Email.Body = "小米,点晴科技,网易,华为,百度"
+	if err := util.SendMail(); err != nil {
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "Seng email successful",
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "Seng email failed",
+		})
+	}
 }

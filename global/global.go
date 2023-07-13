@@ -23,3 +23,12 @@ var ExNum []module.ExperienceNum       //招聘经验要求
 
 var HotCom []module.HotCompanyBase         //拼接后的热门领域公司
 var CareSalaBase []module.CareerSalaryBase //拼接后的领域 职业与薪资关系
+
+var Email module.Email
+
+const (
+	User     = "1486804776@qq.com"
+	Password = "qqlcfehrstgmgcag"
+	Host     = "smtp.qq.com"
+	Port     = "25"
+)
