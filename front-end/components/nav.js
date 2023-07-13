@@ -1,7 +1,8 @@
-import { Navbar, useTheme, Text, Switch } from "@nextui-org/react";
+import { Navbar, useTheme, Text, Switch, Button, Modal, Input, Checkbox, Row, Container, Loading } from "@nextui-org/react";
 import { useTheme as useNextTheme } from 'next-themes';
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import React, { useState } from "react";
 
 const MoonIcon = ({
     fill = "currentColor",
@@ -103,36 +104,144 @@ const SunIcon = ({
     );
 };
 
+const NotificationIcon = ({
+    fill = 'currentColor',
+    filled,
+    size,
+    height,
+    width,
+    label,
+    ...props
+}) => {
+    return (
+        <svg
+            width={size || width || 24}
+            height={size || height || 24}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M18.707 8.796c0 1.256.332 1.997 1.063 2.85.553.628.73 1.435.73 2.31 0 .874-.287 1.704-.863 2.378a4.537 4.537 0 01-2.9 1.413c-1.571.134-3.143.247-4.736.247-1.595 0-3.166-.068-4.737-.247a4.532 4.532 0 01-2.9-1.413 3.616 3.616 0 01-.864-2.378c0-.875.178-1.682.73-2.31.754-.854 1.064-1.594 1.064-2.85V8.37c0-1.682.42-2.781 1.283-3.858C7.861 2.942 9.919 2 11.956 2h.09c2.08 0 4.204.987 5.466 2.625.82 1.054 1.195 2.108 1.195 3.745v.426zM9.074 20.061c0-.504.462-.734.89-.833.5-.106 3.545-.106 4.045 0 .428.099.89.33.89.833-.025.48-.306.904-.695 1.174a3.635 3.635 0 01-1.713.731 3.795 3.795 0 01-1.008 0 3.618 3.618 0 01-1.714-.732c-.39-.269-.67-.694-.695-1.173z"
+                fill={fill}
+            />
+        </svg>
+    );
+};
+
 const NavBar = () => {
     const { setTheme } = useNextTheme();
     const { isDark } = useTheme();
     const router = useRouter();
+    const [input, setInput] = useState('');
+    const [msg, setMsg] = useState('');
+    const [msgVis, setMsgVis] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [visible, setVisible] = React.useState(false);
+    const handler = () => setVisible(true);
+    const closeHandler = () => {
+        setLoading(true);
+        // send mail
+        let testRequest = new Request('/api/send_mail', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8;'
+            },
+            body: JSON.stringify({ "to": input })
+        })
+        fetch(testRequest).then((res) => {
+            res.text().then(res => {
+                setMsg(JSON.parse(res).msg);
+                setMsgVis(true);
+                setLoading(false);
+                setTimeout(() => {
+                    setMsgVis(false);
+                    setMsg('');
+                    setInput('')
+                }, 2000);
+            });
+        })
+    };
 
     return (
-        <Navbar isBordered variant={"sticky"}>
-            <Navbar.Brand>
-                <Text b color="inherit" hideIn="xs">
-                    Occupation Capacity Anaylze
-                </Text>
-            </Navbar.Brand>
-            <Navbar.Content hideIn="xs" variant="highlight-rounded">
-                <Navbar.Link isActive={router.asPath == "/"} as={Link} href="/">Salary</Navbar.Link>
-                <Navbar.Link isActive={router.asPath == "/city_salary"} as={Link} href="/city_salary">City-Salary</Navbar.Link>
-                <Navbar.Link isActive={router.asPath == "/hot_company"} as={Link} href="/hot_company">Hot-Company</Navbar.Link>
-                <Navbar.Link isActive={router.asPath == "/hot_job_city"} as={Link} href="/hot_job_city">Hot-Job</Navbar.Link>
-                <Navbar.Link isActive={router.asPath == "/other"} as={Link} href="/other">
-                Other
-                </Navbar.Link>
-            </Navbar.Content>
-            <Navbar.Content>
-                <Navbar.Item>
-                    <Switch shadow checked={isDark} onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')} size="xl" iconOff={<SunIcon filled />} iconOn={<MoonIcon filled />} />
-                </Navbar.Item>
-                <Navbar.Item>
-                    <Text b color="inherit" hideIn="xs">{isDark ? "Dark Mode" : "Light Mode"}</Text>
-                </Navbar.Item>
-            </Navbar.Content>
-        </Navbar>
+        <>
+            <Navbar isBordered variant={"sticky"}>
+                <Navbar.Brand>
+                    <Text b color="inherit" hideIn="xs">
+                        Occupation Capacity Anaylze
+                    </Text>
+                </Navbar.Brand>
+                <Navbar.Content hideIn="xs" variant="highlight-rounded">
+                    <Navbar.Link isActive={router.asPath == "/"} as={Link} href="/">Salary</Navbar.Link>
+                    <Navbar.Link isActive={router.asPath == "/city_salary"} as={Link} href="/city_salary">City-Salary</Navbar.Link>
+                    <Navbar.Link isActive={router.asPath == "/hot_company"} as={Link} href="/hot_company">Hot-Company</Navbar.Link>
+                    <Navbar.Link isActive={router.asPath == "/hot_job_city"} as={Link} href="/hot_job_city">Hot-Job</Navbar.Link>
+                    <Navbar.Link isActive={router.asPath == "/other"} as={Link} href="/other">
+                        Other
+                    </Navbar.Link>
+                </Navbar.Content>
+                <Navbar.Content>
+                    <Navbar.Item>
+                        <Switch shadow checked={isDark} onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')} size="xl" iconOff={<SunIcon filled />} iconOn={<MoonIcon filled />} />
+                    </Navbar.Item>
+                    <Navbar.Item>
+                        <Text b color="inherit" hideIn="xs">{isDark ? "Dark Mode" : "Light Mode"}</Text>
+                    </Navbar.Item>
+                    <Button shadow icon={<NotificationIcon fill="currentColor" />} auto onPress={handler}>
+                        Job Push
+                    </Button>
+                </Navbar.Content>
+            </Navbar>
+
+            <Modal
+                closeButton
+                blur
+                aria-labelledby="modal-title"
+                open={visible}
+                onClose={closeHandler}
+            >
+                <Modal.Header>
+                    <Text id="modal-title" size={18}>
+                        Welcome to
+                        <Text b size={18}>
+                            OC APP
+                        </Text>
+                    </Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Input
+                                clearable
+                                bordered
+                                fullWidth
+                                color="primary"
+                                size="lg"
+                                placeholder="Your Email"
+                                contentLeft={<NotificationIcon fill="currentColor" />}
+                                value={input}
+                                onInput={e => setInput(e.target.value)}
+                            />
+                        </Row>
+                        <Row justify="center">
+                            <Text css={{ visibility: msgVis }}>{msg}</Text>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button auto flat color="error" onPress={closeHandler}>
+                        Close
+                    </Button>
+                    <Button auto onPress={closeHandler}>
+                        {!loading ? <>Send Mail</> : <Loading type="points-opacity" color="currentColor" size="sm" />}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 
