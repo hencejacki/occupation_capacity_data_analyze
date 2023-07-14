@@ -20,5 +20,7 @@
 # Go workspace file
 go.work
 
-# test
-test
+**/.idea
+
+
+Git提交流程.md
