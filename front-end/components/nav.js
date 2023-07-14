@@ -161,6 +161,7 @@ const NavBar = () => {
                 setTimeout(() => {
                     setMsgVis(false);
                     setMsg('');
+                    setVisible(false);
                     setInput('')
                 }, 2000);
             });
@@ -233,9 +234,6 @@ const NavBar = () => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button auto flat color="error" onPress={closeHandler}>
-                        Close
-                    </Button>
                     <Button auto onPress={closeHandler}>
                         {!loading ? <>Send Mail</> : <Loading type="points-opacity" color="currentColor" size="sm" />}
                     </Button>
