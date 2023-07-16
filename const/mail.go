@@ -24,7 +24,7 @@ const MailMess = // 定义邮件表格样式
 
 const (
 	User     = "1486804776@qq.com"
-	Password = "qqlcfehrstgmgcag"
+	Password = "****************"
 	Host     = "smtp.qq.com"
 	Port     = "25"
 )
